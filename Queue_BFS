@@ -1,0 +1,39 @@
+#include <cstdio>
+#include <queue>
+
+int n, A[102][102];
+int dx[4]={0, 1, 0, -1}, dy[4]={1, 0, -1, 0};
+struct DIA{int a, b, v;};                              // a 행 b 열 v 값
+
+std::queue<DIA> Q;
+
+int main()
+{
+    int i, j, cur, cur2;
+    scanf("%d", &n);
+    
+    A[n/2][n/2] = n/2 + 1;
+    Q.push({n/2, n/2, n/2+1});                          // 가운데 값 지정
+    
+    while(!Q.empty())                                   // BFS (큐가 빌때까지)
+   {
+       DIA t = Q.front();   Q.pop();                     // 큐에서 값 하나 제거
+       
+       if(!t.v) continue;
+       
+       for(i=0; i<4; i++){
+           cur = t.a + dx[i], cur2 = t.b + dy[i];
+           if((0 <= cur && cur < n) && (0 <= cur2 && cur2 < n) && !A[cur][cur2]){
+                Q.push({cur, cur2, t.v-1});
+                A[cur][cur2]=t.v-1;   
+           }
+       }
+   }
+   
+   for(i=0; i<n; i++, puts("")){
+       for(j=0; j<n; j++)
+           printf("%c", A[i][j] > 0 ? '*':'.');
+   }
+   
+   return 0;
+}
