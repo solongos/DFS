@@ -1,10 +1,11 @@
 // DFS (Depth First Search) 깊이우선 탐색 구현
 // 2014. 8. 29. (Fri)
+// 2014. 10. 13. (Mon)
 
-#include <stdio.h>
+#include <cstdio>
 
 int n; //간선의 총 갯수
-int map[31][31], visit[31]; // 인접행렬과 방문 체크 배열
+int map[31][31], visit[31]={}; // 인접행렬과 방문 체크 배열
 
 void DFS(int v)
 {
@@ -13,7 +14,7 @@ void DFS(int v)
     for(i=1; i<=n; i++){
         if(map[v][i]==1 && !visit[i]) {   //정점 v와 정점 i 가 연결되었고, 정점 i를 방문하지 않았다면
             printf("DFS(%d)\n", i);
-            printf("%d -> %d\n", v, i);
+            printf("\t%d -> %d\n", v, i);
             DFS(i);
         }
     }
@@ -24,11 +25,14 @@ int main()
     int i, start;
     int v1, v2;
     scanf("%d %d", &n, &start);
+//    map[start][1] = map[1][start] = 1;
+
     for(i=1; i<=n; i++){
         scanf("%d %d", &v1, &v2);
         map[v1][v2] = map[v2][v1] = 1;
     }
     
+    printf("DFS(%d)\n", start);
     DFS(start);
     
    return 0;
