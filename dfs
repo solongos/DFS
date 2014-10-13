@@ -11,7 +11,7 @@ void DFS(int v)
 {
     int i;
     visit[v] = 1; // 정점 v 방문함
-    for(i=1; i<=n; i++){
+    for(i=1; i<=31; i++){
         if(map[v][i]==1 && !visit[i]) {   //정점 v와 정점 i 가 연결되었고, 정점 i를 방문하지 않았다면
             printf("DFS(%d)\n", i);
             printf("\t%d -> %d\n", v, i);
